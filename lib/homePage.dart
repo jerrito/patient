@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
   double searchWidth = 150;
   @override
   void initState() {
-    mongo.con();
+    Mongo.con();
     super.initState();
   }
 
@@ -83,7 +83,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 const SizedBox(height: 20),
                 FutureBuilder(
-                    future: mongo.getDoctor(),
+                    future: Mongo.getDoctor(),
                     builder: (context, AsyncSnapshot snapshot) {
                       if (snapshot.hasData) {
                         var doctors = snapshot.data.length;
@@ -132,7 +132,7 @@ class _HomePageState extends State<HomePage> {
                                     setState(() {
                                       searching = false;
                                     });
-                                    await mongo.getDoctor().whenComplete(() =>
+                                    await Mongo.getDoctor().whenComplete(() =>
                                         Navigator
                                             .restorablePushReplacementNamed(
                                                 context, "homepage"));
@@ -287,7 +287,7 @@ class _HomePageState extends State<HomePage> {
                 //     ),),
 
                 FutureBuilder(
-                    future: mongo.getDoctorOnline(),
+                    future: Mongo.getDoctorOnline(),
                     builder: (context, AsyncSnapshot snapshot) {
                       if (snapshot.hasData) {
                         var doctors = snapshot.data.length;
@@ -333,7 +333,7 @@ class _HomePageState extends State<HomePage> {
                                         TextStyle(fontWeight: FontWeight.bold)),
                                 MainButton(
                                   onPressed: () async {
-                                    await mongo.getDoctor().whenComplete(() =>
+                                    await Mongo.getDoctor().whenComplete(() =>
                                         Navigator
                                             .restorablePushReplacementNamed(
                                                 context, "homepage"));
@@ -454,7 +454,7 @@ class DoctorSearching extends SearchDelegate<DoctorSearch> {
   @override
   Widget buildResults(BuildContext context) {
     return FutureBuilder(
-        future: mongo.getDoctorBySearch(query),
+        future: Mongo.getDoctorBySearch(query),
         builder: (context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
             var doctors = snapshot.data.length;
@@ -509,7 +509,7 @@ class DoctorSearching extends SearchDelegate<DoctorSearch> {
   @override
   Widget buildSuggestions(BuildContext context) {
     return FutureBuilder(
-        future: mongo.getDoctorBySearch(query),
+        future: Mongo.getDoctorBySearch(query),
         builder: (context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
             var doctors = snapshot.data.length;

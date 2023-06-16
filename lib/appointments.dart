@@ -71,7 +71,7 @@ class _AppointmentsState extends State<Appointments> {
 
               SizedBox(height: h_s * 2.5),
               FutureBuilder(
-                  future: mongo.getAppointment(),
+                  future: Mongo.getAppointment(),
                   builder: (context, AsyncSnapshot snapshot) {
                     if (snapshot.hasData) {
                       var appointmentList = snapshot.data.length;
@@ -109,7 +109,7 @@ class _AppointmentsState extends State<Appointments> {
                                       TextStyle(fontWeight: FontWeight.bold)),
                               MainButton(
                                 onPressed: () async {
-                                  await mongo.con();
+                                  await Mongo.con();
                                   // await mongo.getDoctor();
                                   if (!context.mounted) return;
                                   Navigator.restorablePushReplacementNamed(
@@ -258,7 +258,7 @@ class AppointmentList extends StatelessWidget {
                                           child: const Text("No")),
                                       TextButton(
                                           onPressed: () async {
-                                            await mongo.deleteAppointment(
+                                            await Mongo.deleteAppointment(
                                                 "date", date);
                                             if (!context.mounted) return;
                                             Navigator

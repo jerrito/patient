@@ -2,13 +2,11 @@ import 'package:mongo_dart/mongo_dart.dart';
 import 'package:mongo_dart_query/mongo_dart_query.dart';
 import 'package:project/modules/user.dart';
 import 'package:project/userProvider.dart';
-
-const url =
-    "mongodb+srv://jerrito0240:streak0240845898@cluster0.5dpfja6.mongodb.net/ayaresapa?retryWrites=true&w=majority";
+import 'package:project/constants/api_key.dart';
 const collection = "ayaresapaAccount";
 const collectionAppointment = "ayaresapaAppointment";
-
-class mongo {
+const url=Api.key;
+class Mongo {
   static var db, doctorCollection, appointmentCollection;
   static con() async {
     db = await Db.create(url);
@@ -19,27 +17,27 @@ class mongo {
   }
 
   static Future<List<Map<String, dynamic>>> getDoctor() async {
-    await mongo.con();
+    await Mongo.con();
     var findDoc = await doctorCollection.find().toList();
     return findDoc;
   }
 
   static Future<List<Map<String, dynamic>>> getDoctorOnline() async {
-    await mongo.con();
+    await Mongo.con();
     var findDoc = await doctorCollection.find(where.eq("live", 1)).toList();
     return findDoc;
   }
 
   static Future<List<Map<String, dynamic>>> getDoctorByCategory(
       String name, dynamic val) async {
-    await mongo.con();
+    await Mongo.con();
     var findDoc = await doctorCollection.find(where.eq(name, val)).toList();
     return findDoc;
   }
 
   static Future<List<Map<String, dynamic>>> getDoctorBySearch(
       dynamic val) async {
-    await mongo.con();
+    await Mongo.con();
     var findDoc =
         await doctorCollection.find(where.match("fullname", val)).toList();
     return findDoc;
@@ -47,13 +45,13 @@ class mongo {
 
   static Stream<Future<List<Map<String, dynamic>>>> getDoctorBySearchStream(
       dynamic val) {
-    mongo.con();
+    Mongo.con();
     var findDoc = doctorCollection.find(where.eq("fullname", val)).toList();
     return findDoc;
   }
 
   static Future<List<Map<String, dynamic>>> getDoctor_2() async {
-    mongo.con();
+    Mongo.con();
     var findDoc = await doctorCollection
         .find(where.eq("speciality", "Family physician"))
         .toList();

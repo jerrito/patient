@@ -166,7 +166,7 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                                     speciality: widget.speciality,
                                     location: widget.location,
                                     number: widget.number);
-                                await mongo.insertAppointmentDetail(
+                                await Mongo.insertAppointmentDetail(
                                     appoint: appointment);
                                 setState(() {
                                   loading = false;

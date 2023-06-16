@@ -136,7 +136,7 @@ class _DoctorSearchState extends State<DoctorSearch> {
             ),
             SizedBox(height: h_s * 6.25),
             FutureBuilder(
-              future: mongo.getDoctorByCategory(
+              future: Mongo.getDoctorByCategory(
                 "speciality",
                 cardvalue,
               ),
@@ -170,7 +170,7 @@ class _DoctorSearchState extends State<DoctorSearch> {
                               style: TextStyle(fontWeight: FontWeight.bold)),
                           MainButton(
                             onPressed: () async {
-                              await mongo.getDoctor();
+                              await Mongo.getDoctor();
                               if (!context.mounted) return;
                               Navigator.restorablePushReplacementNamed(
                                   context, "homepage");

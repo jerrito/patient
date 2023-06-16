@@ -142,7 +142,7 @@ class _DoctorsAvailableState extends State<DoctorsAvailable> {
                   const SizedBox(height: 20),
                   FutureBuilder(
                       future:
-                          onlineCheck ? mongo.getDoctor() : mongo.getDoctor_2(),
+                          onlineCheck ? Mongo.getDoctor() : Mongo.getDoctor_2(),
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
@@ -184,7 +184,7 @@ class _DoctorsAvailableState extends State<DoctorsAvailable> {
                                           fontWeight: FontWeight.bold)),
                                   MainButton(
                                     onPressed: () async {
-                                      await mongo.getDoctor();
+                                      await Mongo.getDoctor();
                                       // await mongo.getDoctor();
                                       if (!context.mounted)return;
                                         Navigator.restorablePushReplacementNamed(
